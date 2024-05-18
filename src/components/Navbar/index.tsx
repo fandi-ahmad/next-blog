@@ -12,8 +12,8 @@ export default function() {
         <span className="lg:text-2xl font-bold ps-2">Next Bloog</span>
       </div>
       <div className="text-sm lg:text-base">
-        <span onClick={() => router.push('/')} className="cursor-pointer font-semibold">Article</span>
-        <span onClick={() => router.push('/login')} className="ms-4 sm:ms-6 cursor-pointer font-semibold">Login</span>
+        <span onClick={() => router.push('/')} className="cursor-pointer font-semibold hover:text-gray-600">Article</span>
+        <span onClick={() => router.push('/login')} className="ms-4 sm:ms-6 cursor-pointer font-semibold hover:text-gray-600">Login</span>
       </div>
     </nav>
   )
