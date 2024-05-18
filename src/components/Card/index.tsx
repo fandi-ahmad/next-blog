@@ -31,7 +31,7 @@ export default function Card() {
         <Image
           src={'/images/ai-image-generator.webp'}
           alt="blog card content"
-          width={120}
+          width={140}
           height={80}
           quality={100}
           className="min-w-6 md:min-w-40 lg:min-w-52 h-fit rounded-md ms-4 my-auto"
