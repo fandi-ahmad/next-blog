@@ -2,7 +2,7 @@
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 
-export default function() {
+export default function Navbar() {
   const router = useRouter()
 
   return(

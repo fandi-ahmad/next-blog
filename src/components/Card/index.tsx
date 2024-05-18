@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { AccessTime, AccountCircle, LocalOffer } from "@mui/icons-material"
 
-export default function() {
+export default function Card() {
   return (
     <div className="text-gray-700 mb-4 sm:mb-8">
 
