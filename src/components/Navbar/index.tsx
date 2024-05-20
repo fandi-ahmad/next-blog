@@ -7,7 +7,7 @@ export default function Navbar() {
 
   return(
     <nav className="py-4 flex justify-between items-center">
-      <div className="flex justify-center items-center">
+      <div onClick={() => router.push('/')}  className="flex justify-center items-center cursor-pointer">
         <Image src={'vercel_logo.svg'} alt="" width={40} height={40} />
         <span className="lg:text-2xl font-bold ps-2">Next Bloog</span>
       </div>
