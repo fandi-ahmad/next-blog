@@ -4,27 +4,32 @@ import { useRouter } from "next/navigation"
 import Label from "./label"
 
 interface dataCard {
-  src?: string
+  src?: string,
+  head: string,
+  body: string,
+  created_at: string,
+  username?: string,
+  label?: string,
 }
 
 export default function Card(props: dataCard) {
   const router = useRouter()
 
   return (
-    <div className="text-gray-700 mb-4 sm:mb-8">
+    <div className="text-gray-700 mb-6 sm:mb-8">
 
       <div className="flex justify-between">
 
         <div className="cursor-pointer" onClick={() => router.push('/article')}>
           <div>
-            <h2 className="text-sm sm:text-xl lg:text-2xl font-semibold">The Dark Side of useEffect in React</h2>
-            <span className="hidden sm:block">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod eum asperiores, fugit recusandae aperiam architecto aliquam? Reiciendis officia sequi libero.</span>
+            <h2 className="text-sm sm:text-xl lg:text-2xl font-semibold">{props.head}</h2>
+            <span className="hidden sm:block">{props.body}</span>
           </div>
-          <Label/>
+          <Label created_at={props.created_at} username={props.username} label={props.label} />
         </div>
 
         <Image
-          src={props.src || '/images/ai-image-generator.webp'}
+          src={props.src || '/thumbnail.webp'}
           alt="blog card content"
           width={140}
           height={80}
