@@ -1,19 +1,20 @@
-"use client"
-import Image from "next/image"
-import { useRouter } from "next/navigation"
+import AuthButton from "./AuthButton"
+import NavbarMenu from "./NavbarMenu"
+import NavbarLogo from "./NavbarLogo"
+import { createClient } from "@/lib/supabase/server";
 
-export default function Navbar() {
-  const router = useRouter()
+export default async function Navbar() {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
 
   return(
     <nav className="py-4 flex justify-between items-center">
-      <div onClick={() => router.push('/')}  className="flex justify-center items-center cursor-pointer">
-        <Image src={'vercel_logo.svg'} alt="" width={40} height={40} />
-        <span className="lg:text-2xl font-bold ps-2">Next Bloog</span>
-      </div>
-      <div className="text-sm lg:text-base">
-        <span onClick={() => router.push('/')} className="cursor-pointer font-semibold hover:text-gray-600">Article</span>
-        <span onClick={() => router.push('/login')} className="ms-4 sm:ms-6 cursor-pointer font-semibold hover:text-gray-600">Login</span>
+      <NavbarLogo/>
+      <div className="text-sm lg:text-base flex flex-row">
+        <NavbarMenu href="/" text="Article" />
+        <NavbarMenu href="/" text="About" />
+        {user ? <NavbarMenu href="/profile" text="Profile" /> : null}
+        <AuthButton/>
       </div>
     </nav>
   )
