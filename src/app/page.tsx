@@ -1,7 +1,7 @@
 "use client"
 import Card from "@/components/Card";
 import { useEffect, useState } from "react";
-import { GetArticle } from "@/supabase/GetArticle";
+import { GetArticle } from "@/lib/supabase/GetArticle";
 import { DateFormat } from "@/utils/DateFormat";
 
 type dataArticles = {
