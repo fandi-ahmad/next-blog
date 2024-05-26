@@ -22,6 +22,7 @@ export default function Article() {
       
       <p className="mb-4 text-sm sm:text-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate molestiae saepe placeat aspernatur vitae ut voluptatem fugit, explicabo maiores eum eius atque nam fugiat tenetur.</p>
       <p className="mb-4 text-sm sm:text-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate molestiae saepe placeat aspernatur vitae ut voluptatem fugit, explicabo maiores eum eius atque nam fugiat tenetur.</p>
+      <p className="mb-4 text-sm sm:text-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate molestiae saepe placeat aspernatur vitae ut voluptatem fugit, explicabo maiores eum eius atque nam fugiat tenetur.</p>
 
     </main>
   );
