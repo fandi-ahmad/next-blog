@@ -9,7 +9,7 @@ type Props = ComponentProps<"button"> & {
 };
 
 export function SubmitButton({ children, pendingText, ...props }: Props) {
-  const { pending, action, data, method } = useFormStatus();
+  const { pending, action } = useFormStatus();
   const isPending = pending && action === props.formAction;
   const [isShowAlert, setIsShowAlert] = useState<boolean>(false)
   const [textErrorAlert, setTextErrorAlert] = useGlobalState('textErrorAlert')

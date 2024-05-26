@@ -20,7 +20,7 @@ export default function Login() {
     });
   
     if (error) {
-      return redirect(`/login?message=Email or password is wrong`);
+      return redirect("/login?message=Email or password is wrong");
     }
   
     return redirect("/");
@@ -38,7 +38,7 @@ export default function Login() {
         </SubmitButton>
         
         <center className="text-xs">
-          Don't have an account?
+          <span>Don&apos;t have an account?</span>
           <Link href={'/register'} className="text-blue-600 hover:underline"> Sign Up</Link>
         </center>
       </form>
