@@ -8,7 +8,7 @@ interface dataCard {
   head: string,
   body: string,
   created_at: string,
-  username?: string,
+  username?: string | null | undefined,
   label?: string,
 }
 
