@@ -32,6 +32,7 @@ export default function ProfileData() {
   const [isDisabledSaveBtn, setIsDisabledSaveBtn] = useState<boolean>(true)
   const [textErrorAlert, setTextErrorAlert] = useGlobalState('textErrorAlert')
   const [displayErrorAlert, setDisplayErrorAlert] = useGlobalState('displayErrorAlert')
+  const [isShowLoading, setIsShowLoading] = useGlobalState('isShowLoading')
 
   const [articleList, setArticleList] = useState<dataArticles[]>([])
 
@@ -76,6 +77,7 @@ export default function ProfileData() {
 
 
   useEffect(() => {
+    setIsShowLoading(true)
     getCurrentUserLogin()
   }, [])
 
@@ -86,7 +88,10 @@ export default function ProfileData() {
   }
 
   useEffect(() => {
-    isDataReady ? getArticleByUser() : null
+    if (isDataReady) {
+      getArticleByUser()
+      setIsShowLoading(false)
+    }
   }, [isDataReady])
 
   // ==========================
