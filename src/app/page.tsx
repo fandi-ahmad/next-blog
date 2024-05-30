@@ -1,8 +1,8 @@
 "use client"
 import Card from "@/components/Card";
 import { useEffect, useState } from "react";
-import { GetArticle } from "@/lib/supabase/GetArticle";
 import { DateFormat } from "@/utils/DateFormat";
+import { GetArticleWithUser } from "@/lib/supabase/GetArticleWithUser";
 
 type dataArticles = {
   id: number,
@@ -11,21 +11,23 @@ type dataArticles = {
   head_post: string,
   label: string,
   thumbnail: any,
-  created_at: string
+  created_at: string,
+  user: {
+    id: number,
+    username: string,
+  }
 }
 
 export default function Home() {
   const [articleList, setArticleList] = useState<dataArticles[]>([])
-  
-  const getAllArticle = async () => {
-    const response = await GetArticle()
-    if (response.data) {
-      setArticleList(response.data);
-    }
+
+  const getAllArticleNested = async () => {
+    const response: any = await GetArticleWithUser()
+    setArticleList(response)
   }
 
   useEffect(() => {
-    getAllArticle()
+    getAllArticleNested()
   }, [])
 
   return (
@@ -37,6 +39,7 @@ export default function Home() {
             head={article.head_post}
             body={article.body_post}
             created_at={DateFormat(article.created_at)}
+            username={article.user.username}
             label={article.label}
             src={article.thumbnail}
           />
