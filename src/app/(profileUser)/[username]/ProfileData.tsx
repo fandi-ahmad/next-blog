@@ -6,6 +6,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, T
 import Card from "@/components/Card";
 import { DateFormat } from "@/utils/DateFormat";
 import { useGlobalState } from "@/lib/state";
+import Link from "next/link";
 
 type dataArticles = {
   id: number,
@@ -33,6 +34,7 @@ export default function ProfileData() {
   const [textErrorAlert, setTextErrorAlert] = useGlobalState('textErrorAlert')
   const [displayErrorAlert, setDisplayErrorAlert] = useGlobalState('displayErrorAlert')
   const [isShowLoading, setIsShowLoading] = useGlobalState('isShowLoading')
+  const [usernameLogin, setUsernameLogin] = useGlobalState('usernameLogin')
 
   const [articleList, setArticleList] = useState<dataArticles[]>([])
 
@@ -148,9 +150,9 @@ export default function ProfileData() {
 
       <hr className="mt-8" />
 
-      <div className="mt-8 flex justify-end">
+      <Link href={`/${usernameLogin}/new-article`} className="mt-8 flex justify-end">
         <Button className="capitalize" variant="outlined">Create New Article</Button>
-      </div>
+      </Link>
       <div className="mt-6">
         {articleList.map((article) => (
           <Card

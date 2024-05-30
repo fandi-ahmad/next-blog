@@ -31,6 +31,7 @@ export default function Username() {
     if (users) {
       setDataUser(users[0])
     }
+    setIsShowLoading(false)
   }
 
   useEffect(() => {
@@ -40,8 +41,6 @@ export default function Username() {
   useEffect(() => {
     if (dataUser) {
       setIsShowNavbar(true)
-    } else {
-      setIsShowLoading(false)
     }
   }, [isShowNavbar, dataUser])
 
