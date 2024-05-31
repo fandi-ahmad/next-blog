@@ -1,12 +1,16 @@
 "use client"
 import { createClient } from "@/lib/supabase/client"
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { useGlobalState } from "@/lib/state"
 import { useEffect, useState } from "react"
-import { Button, TextField, TextareaAutosize } from "@mui/material"
+import { Button, TextField } from "@mui/material"
 import { useRouter } from "next/navigation"
+import UploadFile from "./UploadFile"
 
 export default function NewArticle() {
   const supabase = createClient()
+  const componentClient = createClientComponentClient()
+
   const router = useRouter()
   const [usernameLogin, setUsernameLogin] = useGlobalState('usernameLogin')
   const [idUser, setIdUser] = useState<number>()
@@ -16,6 +20,9 @@ export default function NewArticle() {
   const [bodyPost, setBodyPost] = useState<string>('')
   const [label, setLabel] = useState<string>('')
 
+  const [thumbnailUpload, setThumbnailUpload] = useGlobalState('thumbnailUpload')
+  const [thumbnailBlob, setThumbnailBlob] = useGlobalState('thumbnailBlob')
+
   const getUserByUsername = async () => {
     const { data: users, error } = await supabase
     .from('users')
@@ -24,8 +31,25 @@ export default function NewArticle() {
     users.id ? setIdUser(users.id) : null
   }
 
+  const createThumbnail = async () => {
+    const { data, error } = await componentClient.storage
+    .from('thumbnails')
+    .upload(thumbnailUpload.name, thumbnailUpload);
+
+    interface resultType {
+      fullPath?: string,
+      id?: string,
+      path?: string,
+    }
+
+    const result: null | resultType = data
+    return result?.fullPath
+  }
+
   const createNewArticle = async () => {
     setIsDisabledBtn(true)
+    const thumbnailPath = await createThumbnail()
+    
     const { data, error } = await supabase
     .from('articles')
     .insert([{
@@ -33,11 +57,13 @@ export default function NewArticle() {
       head_post: headPost,
       body_post: bodyPost,
       label: label,
+      thumbnail: thumbnailPath,
     }])
     .select()
 
     if (!error) {
       router.push('/')
+      setThumbnailBlob('/blank-thumbnail.webp')
     }
     setIsDisabledBtn(false)
   }
@@ -50,6 +76,7 @@ export default function NewArticle() {
 
   return (
     <div className="mt-10">
+      <UploadFile/>
       <form action={createNewArticle}>
         <div>
           <TextField required label='Title Head' className="w-full mb-4" onChange={(e) => setHeadPost(e.target.value)} />
@@ -63,7 +90,6 @@ export default function NewArticle() {
           <Button type="submit" className="capitalize" variant="outlined" disabled={isDisabledBtn}>Post new article</Button>
         </div>
       </form>
-
     </div>
   )
 }

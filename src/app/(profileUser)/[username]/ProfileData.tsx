@@ -21,6 +21,7 @@ type dataArticles = {
 
 export default function ProfileData() {
   const supabase = createClient();
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!+ '/storage/v1/object/public/'
   const [userList, setUserList] = useState<any>()
   const [isDataReady, setIsDataReady] = useState<boolean>(false)
 
@@ -162,7 +163,7 @@ export default function ProfileData() {
             created_at={DateFormat(article.created_at)}
             label={article.label}
             username={username}
-            src={article.thumbnail}
+            src={ article.thumbnail ? supabaseUrl+article.thumbnail : ''}
           />
         ))}
       </div>
