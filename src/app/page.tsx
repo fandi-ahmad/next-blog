@@ -20,6 +20,7 @@ type dataArticles = {
 
 export default function Home() {
   const [articleList, setArticleList] = useState<dataArticles[]>([])
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!+ '/storage/v1/object/public/'
 
   const getAllArticleNested = async () => {
     const response: any = await GetArticleWithUser()
@@ -41,7 +42,7 @@ export default function Home() {
             created_at={DateFormat(article.created_at)}
             username={article.user.username}
             label={article.label}
-            src={article.thumbnail}
+            src={ article.thumbnail ? supabaseUrl+article.thumbnail : ''}
           />
         ))}
       </div>
