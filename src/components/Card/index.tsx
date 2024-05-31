@@ -1,5 +1,4 @@
 "use client"
-import Image from "next/image"
 import { useRouter } from "next/navigation"
 import Label from "./label"
 
@@ -17,7 +16,6 @@ export default function Card(props: dataCard) {
 
   return (
     <div className="text-gray-700 mb-6 sm:mb-8">
-
       <div className="flex justify-between">
 
         <div className="cursor-pointer" onClick={() => router.push('/article')}>
@@ -28,18 +26,13 @@ export default function Card(props: dataCard) {
           <Label created_at={props.created_at} username={props.username} label={props.label} />
         </div>
 
-        <Image
+        <img
           src={props.src || '/thumbnail.webp'}
           alt="blog card content"
-          width={140}
-          height={80}
-          quality={100}
-          priority
           className="min-w-28 max-w-28 md:min-w-40 md:max-w-40 lg:min-w-52 lg:max-w-52 min-h-16 max-h-16 md:min-h-20 md:max-h-20 lg:min-h-28 lg:max-h-28 object-cover rounded-md ms-4 my-auto"
         />
 
       </div>
-      
     </div>
   )
 }
