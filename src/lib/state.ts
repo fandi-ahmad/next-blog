@@ -6,6 +6,8 @@ interface typeState {
   isShowNavbar: boolean,
   usernameLogin: string,
   isShowLoading: boolean,
+  thumbnailUpload: any,
+  thumbnailBlob: string,
 };
 
 const initialState: typeState = {
@@ -13,7 +15,9 @@ const initialState: typeState = {
   displayErrorAlert: 'hidden',
   isShowNavbar: false,
   usernameLogin: '',
-  isShowLoading: true
+  isShowLoading: true,
+  thumbnailUpload: null,
+  thumbnailBlob: '/blank-thumbnail.webp',
 };
 
 const { useGlobalState } = createGlobalState(initialState);
