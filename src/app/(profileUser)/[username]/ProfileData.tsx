@@ -1,12 +1,15 @@
 "use client"
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { Edit } from "@mui/icons-material";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Tooltip } from "@mui/material";
 import Card from "@/components/Card";
 import { DateFormat } from "@/utils/DateFormat";
 import { useGlobalState } from "@/lib/state";
 import Link from "next/link";
+import LimitText from "@/utils/LimitText";
+import { useRouter } from "next/navigation";
 
 type dataArticles = {
   id: number,
@@ -21,7 +24,9 @@ type dataArticles = {
 
 export default function ProfileData() {
   const supabase = createClient();
+  const componentClient = createClientComponentClient()
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!+ '/storage/v1/object/public/'
+  const router = useRouter()
   const [userList, setUserList] = useState<any>()
   const [isDataReady, setIsDataReady] = useState<boolean>(false)
 
@@ -139,6 +144,34 @@ export default function ProfileData() {
     closeEditProfile()
   }
 
+  // ============ delete article =====================
+
+  const [isOpenDialodDelete, setIsOpenDialogDelete] = useState<boolean>(false);
+  const [idArticle, setIdArticle] = useState<number>()
+  const [thumbnailPath, setThumbnailPath] = useState<string>('')
+
+  const handleClickDelete = (id: number, path: string) => {
+    setIsOpenDialogDelete(true)
+    setIdArticle(id)
+    
+    const pathName = path.split('/').pop();
+    pathName ? setThumbnailPath(pathName) : null
+  }
+
+  const deleteArticle = async () => {
+    await supabase
+    .from('articles')
+    .delete()
+    .eq('id', idArticle)
+
+    const { data, error } = await componentClient.storage
+    .from('thumbnails')
+    .remove([thumbnailPath])
+
+    getArticleByUser()
+    setIsOpenDialogDelete(false)
+  }
+
 
   return (
     <>
@@ -151,19 +184,23 @@ export default function ProfileData() {
 
       <hr className="mt-8" />
 
-      <Link href={`/${usernameLogin}/new-article`} className="mt-8 flex justify-end">
-        <Button className="capitalize" variant="outlined">Create New Article</Button>
-      </Link>
+      <div className="mt-8 flex justify-end">
+        <Link href={`/${usernameLogin}/new-article`}>
+          <Button className="capitalize" variant="outlined">Create New Article</Button>
+        </Link>
+      </div>
       <div className="mt-6">
         {articleList.map((article) => (
           <Card
             key={article.id}
             head={article.head_post}
-            body={article.body_post}
+            body={LimitText(article.body_post)}
             created_at={DateFormat(article.created_at)}
             label={article.label}
             username={username}
             src={ article.thumbnail ? supabaseUrl+article.thumbnail : ''}
+            onClickEdit={() => router.push(`/${usernameLogin}/edit-article/${article.id}`)}
+            onClickDelete={() => handleClickDelete(article.id, article.thumbnail)}
           />
         ))}
       </div>
@@ -180,8 +217,19 @@ export default function ProfileData() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={closeEditProfile}>Cancel</Button>
-          <Button onClick={updateUserProfile} disabled={isDisabledSaveBtn}>Save</Button>
+          <Button className="capitalize" onClick={closeEditProfile}>Cancel</Button>
+          <Button className="capitalize" onClick={updateUserProfile} disabled={isDisabledSaveBtn}>Save</Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={isOpenDialodDelete} onClose={closeEditProfile}>
+        <DialogTitle>Delete Article</DialogTitle>
+        <DialogContent>
+          <p>Are you sure you want to delete the selected articles? you can't recover it back.</p>
+        </DialogContent>
+        <DialogActions>
+          <Button className="capitalize" onClick={() => setIsOpenDialogDelete(false)}>Cancel</Button>
+          <Button className="capitalize" onClick={deleteArticle}>Yes, delete it</Button>
         </DialogActions>
       </Dialog>
 
