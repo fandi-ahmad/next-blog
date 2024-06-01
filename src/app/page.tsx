@@ -3,6 +3,7 @@ import Card from "@/components/Card";
 import { useEffect, useState } from "react";
 import { DateFormat } from "@/utils/DateFormat";
 import { GetArticleWithUser } from "@/lib/supabase/GetArticleWithUser";
+import LimitText from "@/utils/LimitText";
 
 type dataArticles = {
   id: number,
@@ -38,7 +39,7 @@ export default function Home() {
           <Card
             key={article.id}
             head={article.head_post}
-            body={article.body_post}
+            body={LimitText(article.body_post)}
             created_at={DateFormat(article.created_at)}
             username={article.user.username}
             label={article.label}
