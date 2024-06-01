@@ -2,7 +2,7 @@ import { AccessTime, AccountCircle, LocalOffer } from "@mui/icons-material"
 
 interface dataLabel {
   created_at: string,
-  username?: string,
+  username?: string | null | undefined,
   label?: string,
 }
 
