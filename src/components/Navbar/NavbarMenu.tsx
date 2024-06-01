@@ -1,5 +1,5 @@
 "use client"
-import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 interface navbarMenuProps {
   href: string,
@@ -8,10 +8,9 @@ interface navbarMenuProps {
 }
 
 export default function NavbarMenu(props: navbarMenuProps) {
-  const router = useRouter()
   return (
-    <span onClick={() => router.push(props.href)} className={`${props.className} ms-4 sm:ms-6 cursor-pointer font-medium hover:text-gray-600`}>
+    <Link href={props.href} className={`${props.className} ms-4 sm:ms-6 cursor-pointer font-medium hover:text-gray-600`}>
       {props.text}
-    </span>
+    </Link>
   )
 }

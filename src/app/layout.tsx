@@ -21,7 +21,9 @@ export default function RootLayout({
       <body className={inter.className + ' px-4 sm:px-12 md:px-24 xl:px-52'}>
         <Navbar/>
         <ErrorAlert/>
-        {children}
+        <div className="text-gray-700">
+          {children}
+        </div>
       </body>
     </html>
   );
