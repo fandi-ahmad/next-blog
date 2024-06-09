@@ -42,6 +42,7 @@ export default function Home() {
             created_at={DateFormat(article.created_at)}
             username={article.user.username}
             label={article.label}
+            idForHref={article.id}
           />
         ))}
       </div>

@@ -188,6 +188,7 @@ export default function ProfileData() {
             created_at={DateFormat(article.created_at)}
             label={article.label}
             username={username}
+            idForHref={article.id}
             onClickEdit={() => router.push(`/${usernameLogin}/edit-article/${article.id}`)}
             onClickDelete={() => handleClickDelete(article.id)}
           />

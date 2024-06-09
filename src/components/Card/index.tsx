@@ -1,9 +1,9 @@
 "use client"
-import { useRouter } from "next/navigation"
 import Label from "./label"
 import { MoreHoriz } from "@mui/icons-material"
 import { Menu, MenuItem, Tooltip } from "@mui/material"
 import { useState } from "react"
+import Link from "next/link"
 
 interface dataCard {
   src?: string,
@@ -14,10 +14,10 @@ interface dataCard {
   label?: string,
   onClickEdit?: any,
   onClickDelete?: any,
+  idForHref?: string | number,
 }
 
 export default function Card(props: dataCard) {
-  const router = useRouter()
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -31,7 +31,7 @@ export default function Card(props: dataCard) {
   return (
     <>
       <div className="text-gray-700 mb-4 sm:mb-6">
-        <div onClick={() => router.push('/article')} className="flex justify-between  hover:bg-gray-300 px-4 py-3 rounded-md duration-100 transition-all cursor-pointer">
+        <Link href={`/article/${props.idForHref}`} className="flex justify-between  hover:bg-gray-300 px-4 py-3 rounded-md duration-100 transition-all cursor-pointer">
 
           <div>
             <div>
@@ -49,7 +49,7 @@ export default function Card(props: dataCard) {
             className="min-w-28 max-w-28 md:min-w-40 md:max-w-40 lg:min-w-52 lg:max-w-52 min-h-16 max-h-16 md:min-h-20 md:max-h-20 lg:min-h-28 lg:max-h-28 object-cover rounded-md ms-4 my-auto"
           /> */}
 
-        </div>
+        </Link>
         {
           props.onClickEdit || props.onClickDelete ?
           <Tooltip className="px-4" title='Option' arrow>
