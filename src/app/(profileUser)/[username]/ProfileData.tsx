@@ -1,7 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { Edit } from "@mui/icons-material";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Tooltip } from "@mui/material";
 import Card from "@/components/Card";
@@ -23,7 +22,6 @@ type dataArticles = {
 
 export default function ProfileData() {
   const supabase = createClient();
-  const componentClient = createClientComponentClient()
   const router = useRouter()
   const [userList, setUserList] = useState<any>()
   const [isDataReady, setIsDataReady] = useState<boolean>(false)
