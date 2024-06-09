@@ -13,6 +13,7 @@ interface typeState {
   bodyPost: string,
   labelPost: string,
   idArticle: number | null,
+  alertType: 'error' | 'info' | 'success' | 'warning'
 };
 
 const initialState: typeState = {
@@ -28,6 +29,7 @@ const initialState: typeState = {
   bodyPost: '',
   labelPost: '',
   idArticle: null,
+  alertType: 'error'
 };
 
 const { useGlobalState } = createGlobalState(initialState);
