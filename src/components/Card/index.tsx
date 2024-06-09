@@ -30,11 +30,11 @@ export default function Card(props: dataCard) {
 
   return (
     <>
-      <div className="text-gray-700 mb-8 sm:mb-10">
-        <div className="flex justify-between">
+      <div className="text-gray-700 mb-4 sm:mb-6">
+        <div onClick={() => router.push('/article')} className="flex justify-between  hover:bg-gray-300 px-4 py-3 rounded-md duration-100 transition-all cursor-pointer">
 
           <div>
-            <div className="cursor-pointer" onClick={() => router.push('/article')}>
+            <div>
               <div>
                 <h2 className="text-sm sm:text-xl lg:text-2xl font-semibold">{props.head}</h2>
                 <span className="hidden sm:block">{props.body}</span>
@@ -43,16 +43,16 @@ export default function Card(props: dataCard) {
             </div>
           </div>
 
-          <img
+          {/* <img
             src={props.src || '/thumbnail.webp'}
             alt="blog card content"
             className="min-w-28 max-w-28 md:min-w-40 md:max-w-40 lg:min-w-52 lg:max-w-52 min-h-16 max-h-16 md:min-h-20 md:max-h-20 lg:min-h-28 lg:max-h-28 object-cover rounded-md ms-4 my-auto"
-          />
+          /> */}
 
         </div>
         {
           props.onClickEdit || props.onClickDelete ?
-          <Tooltip title='Option' arrow>
+          <Tooltip className="px-4" title='Option' arrow>
             <button onClick={handleClick}>
               <MoreHoriz/>
             </button>

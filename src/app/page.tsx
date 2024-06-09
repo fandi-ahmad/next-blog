@@ -11,7 +11,6 @@ type dataArticles = {
   body_post: string,
   head_post: string,
   label: string,
-  thumbnail: any,
   created_at: string,
   user: {
     id: number,
@@ -34,7 +33,7 @@ export default function Home() {
 
   return (
     <main>
-      <div className="mt-4">
+      <div className="mt-10">
         {articleList.map((article) => (
           <Card
             key={article.id}
@@ -43,7 +42,6 @@ export default function Home() {
             created_at={DateFormat(article.created_at)}
             username={article.user.username}
             label={article.label}
-            src={ article.thumbnail ? supabaseUrl+article.thumbnail : ''}
           />
         ))}
       </div>

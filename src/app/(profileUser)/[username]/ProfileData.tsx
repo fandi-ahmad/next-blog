@@ -17,7 +17,6 @@ type dataArticles = {
   body_post: string,
   head_post: string,
   label: string,
-  thumbnail: any,
   created_at: string
 }
 
@@ -25,7 +24,6 @@ type dataArticles = {
 export default function ProfileData() {
   const supabase = createClient();
   const componentClient = createClientComponentClient()
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!+ '/storage/v1/object/public/'
   const router = useRouter()
   const [userList, setUserList] = useState<any>()
   const [isDataReady, setIsDataReady] = useState<boolean>(false)
@@ -148,14 +146,10 @@ export default function ProfileData() {
 
   const [isOpenDialodDelete, setIsOpenDialogDelete] = useState<boolean>(false);
   const [idArticle, setIdArticle] = useState<number>()
-  const [thumbnailPath, setThumbnailPath] = useState<string>('')
 
-  const handleClickDelete = (id: number, path: string) => {
+  const handleClickDelete = (id: number) => {
     setIsOpenDialogDelete(true)
     setIdArticle(id)
-    
-    const pathName = path.split('/').pop();
-    pathName ? setThumbnailPath(pathName) : null
   }
 
   const deleteArticle = async () => {
@@ -163,10 +157,6 @@ export default function ProfileData() {
     .from('articles')
     .delete()
     .eq('id', idArticle)
-
-    const { data, error } = await componentClient.storage
-    .from('thumbnails')
-    .remove([thumbnailPath])
 
     getArticleByUser()
     setIsOpenDialogDelete(false)
@@ -198,9 +188,8 @@ export default function ProfileData() {
             created_at={DateFormat(article.created_at)}
             label={article.label}
             username={username}
-            src={ article.thumbnail ? supabaseUrl+article.thumbnail : ''}
             onClickEdit={() => router.push(`/${usernameLogin}/edit-article/${article.id}`)}
-            onClickDelete={() => handleClickDelete(article.id, article.thumbnail)}
+            onClickDelete={() => handleClickDelete(article.id)}
           />
         ))}
       </div>

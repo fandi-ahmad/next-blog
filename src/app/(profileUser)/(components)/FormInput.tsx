@@ -3,7 +3,6 @@ import { createClient } from "@/lib/supabase/client"
 import { useGlobalState } from "@/lib/state"
 import { useEffect } from "react"
 import { Button, TextField } from "@mui/material"
-import UploadFile from "./UploadFile"
 
 interface formInputType {
   action: any,
@@ -36,7 +35,6 @@ export default function FormInput(props: formInputType) {
 
   return (
     <div>
-      <UploadFile/>
       <form action={props.action}>
         <div>
           <TextField required label='Title Head' className="w-full mb-4" value={headPost} onChange={(e) => setHeadPost(e.target.value)} />

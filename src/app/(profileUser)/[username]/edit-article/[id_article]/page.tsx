@@ -47,7 +47,6 @@ export default function EditArticle() {
   }
 
   useEffect(() => {
-    document.getElementById('uploadFileInput')?.classList.add('hidden')
     getArticleById()
   }, [])
 
