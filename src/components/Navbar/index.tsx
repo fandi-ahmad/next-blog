@@ -17,6 +17,7 @@ export default async function Navbar() {
         <NavbarLogo/>
         <div className="text-sm lg:text-base flex flex-row">
           <NavbarMenu href="/" text="Article" />
+          <NavbarMenu href="/about" text="About" />
           {user ? <NavbarMenuProfile user={user} /> : null}
           <AuthButton/>
         </div>
