@@ -1,6 +1,9 @@
 "use client"
-import { useRouter } from "next/navigation"
 import Label from "./label"
+import { MoreHoriz } from "@mui/icons-material"
+import { Menu, MenuItem, Tooltip } from "@mui/material"
+import { useState } from "react"
+import Link from "next/link"
 
 interface dataCard {
   src?: string,
@@ -9,30 +12,61 @@ interface dataCard {
   created_at: string,
   username?: string | null | undefined,
   label?: string,
+  onClickEdit?: any,
+  onClickDelete?: any,
+  idForHref?: string | number,
 }
 
 export default function Card(props: dataCard) {
-  const router = useRouter()
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
-    <div className="text-gray-700 mb-6 sm:mb-8">
-      <div className="flex justify-between">
+    <>
+      <div className="text-gray-700 mb-4 sm:mb-6">
+        <Link href={`/article/${props.idForHref}`} className="flex justify-between  hover:bg-gray-300 px-4 py-3 rounded-md duration-100 transition-all cursor-pointer">
 
-        <div className="cursor-pointer" onClick={() => router.push('/article')}>
           <div>
-            <h2 className="text-sm sm:text-xl lg:text-2xl font-semibold">{props.head}</h2>
-            <span className="hidden sm:block">{props.body}</span>
+            <div>
+              <div>
+                <h2 className="text-sm sm:text-xl lg:text-2xl font-semibold">{props.head}</h2>
+                <span className="hidden sm:block">{props.body}</span>
+              </div>
+              <Label created_at={props.created_at} username={props.username} label={props.label} />
+            </div>
           </div>
-          <Label created_at={props.created_at} username={props.username} label={props.label} />
-        </div>
 
-        <img
-          src={props.src || '/thumbnail.webp'}
-          alt="blog card content"
-          className="min-w-28 max-w-28 md:min-w-40 md:max-w-40 lg:min-w-52 lg:max-w-52 min-h-16 max-h-16 md:min-h-20 md:max-h-20 lg:min-h-28 lg:max-h-28 object-cover rounded-md ms-4 my-auto"
-        />
+          {/* <img
+            src={props.src || '/thumbnail.webp'}
+            alt="blog card content"
+            className="min-w-28 max-w-28 md:min-w-40 md:max-w-40 lg:min-w-52 lg:max-w-52 min-h-16 max-h-16 md:min-h-20 md:max-h-20 lg:min-h-28 lg:max-h-28 object-cover rounded-md ms-4 my-auto"
+          /> */}
 
+        </Link>
+        {
+          props.onClickEdit || props.onClickDelete ?
+          <Tooltip className="px-4" title='Option' arrow>
+            <button onClick={handleClick}>
+              <MoreHoriz/>
+            </button>
+          </Tooltip> : null
+        }
       </div>
-    </div>
+
+      {
+        props.onClickEdit || props.onClickDelete ?
+        <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+          <MenuItem onClick={props.onClickEdit}>Edit</MenuItem>
+          <MenuItem onClick={props.onClickDelete}>Delete</MenuItem>
+        </Menu> : null
+      }
+    </>
   )
 }

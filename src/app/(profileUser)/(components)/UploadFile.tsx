@@ -14,7 +14,7 @@ export default function UploadFile() {
   };
 
   return (
-    <div className="mb-8">
+    <div className="mb-8" id="uploadFileInput">
       <Tooltip title='Upload thumbnail' arrow>
         <Image
           src={thumbnailBlob}
