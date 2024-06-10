@@ -5,6 +5,7 @@ import Link from "next/link";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import CheckUser from "../(components)/CheckUser";
 
 export default function Register() {
   const signUp = async (formData: FormData) => {
@@ -34,6 +35,7 @@ export default function Register() {
 
   return (
     <>
+      <CheckUser/>
       <Heading>Sign Up</Heading>
       <form className="max-w-fit mx-auto">
         <TextField label="Email" name="email" variant="outlined" type="email" required className="w-full mb-4" />

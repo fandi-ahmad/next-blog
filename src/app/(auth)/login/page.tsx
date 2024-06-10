@@ -5,6 +5,7 @@ import { Heading } from "../(components)/Heading"
 import { TextField } from "@mui/material"
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
+import CheckUser from '../(components)/CheckUser';
 
 export default function Login() {
 
@@ -28,6 +29,7 @@ export default function Login() {
 
   return (
     <>
+      <CheckUser/>
       <Heading>Sign In</Heading>
       <form className="max-w-fit mx-auto">
         <TextField label="Email" name="email" variant="outlined" type="email" required className="w-full mb-4" />

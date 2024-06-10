@@ -16,6 +16,14 @@ export default function EditArticle() {
   const [bodyPost, setBodyPost] = useGlobalState('bodyPost')
   const [labelPost, setLabelPost] = useGlobalState('labelPost')
 
+  const chechUser = async () => {
+    const {data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+      router.push('/')
+    }
+  }
+
   const getArticleById = async () => {
     const { data: articles } = await supabase
     .from('articles')
@@ -26,6 +34,8 @@ export default function EditArticle() {
       setHeadPost(articles.head_post)
       setBodyPost(articles.body_post)
       setLabelPost(articles.label)
+    } else {
+      router.push('/')
     }
   
   }
@@ -47,6 +57,7 @@ export default function EditArticle() {
   }
 
   useEffect(() => {
+    chechUser()
     getArticleById()
   }, [])
 

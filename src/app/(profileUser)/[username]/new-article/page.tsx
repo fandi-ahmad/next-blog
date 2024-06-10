@@ -1,10 +1,9 @@
 "use client"
 import { createClient } from "@/lib/supabase/client"
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import FormInput from "../../(components)/FormInput"
 import { useGlobalState } from "@/lib/state"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function NewArticle() {
   const supabase = createClient()
@@ -16,6 +15,18 @@ export default function NewArticle() {
   const [label, setLabel] = useGlobalState('labelPost')
 
   const [isDisabledBtn, setIsDisabledBtn] = useState<boolean>(false)
+
+  const chechUser = async () => {
+    const {data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+      router.push('/')
+    }
+  }
+
+  useEffect(() => {
+    chechUser()
+  }, [])
 
   const createNewArticle = async () => {
     setIsDisabledBtn(true)
