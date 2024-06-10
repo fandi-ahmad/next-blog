@@ -18,6 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/next-write-logo.svg" />
+      </head>
       <body className={inter.className + ' px-4 sm:px-12 md:px-24 xl:px-52'}>
         <Navbar/>
         <BaseAlert/>
