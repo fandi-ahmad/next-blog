@@ -81,12 +81,6 @@ export default function ProfileData() {
   }
 
 
-  useEffect(() => {
-    setIsShowLoading(true)
-    getCurrentUserLogin()
-    getUserByUsernameInParam()
-  }, [])
-
 
   const getArticleByUser = async () => {
     const {data: articles} = await supabase.from('articles').select('*').eq('id_user', userId)
@@ -94,6 +88,9 @@ export default function ProfileData() {
   }
 
   useEffect(() => {
+    setIsShowLoading(true)
+    getCurrentUserLogin()
+    getUserByUsernameInParam()
     if (isDataReady) {
       getArticleByUser()
       setIsShowLoading(false)
