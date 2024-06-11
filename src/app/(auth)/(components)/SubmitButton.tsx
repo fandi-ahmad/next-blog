@@ -3,6 +3,7 @@ import { useFormStatus } from "react-dom";
 import { type ComponentProps } from "react";
 import { useEffect, useState } from "react";
 import { useGlobalState } from "@/lib/state";
+import { useSearchParams } from "next/navigation";
 
 type Props = ComponentProps<"button"> & {
   pendingText?: string;
@@ -14,7 +15,8 @@ export function SubmitButton({ children, pendingText, ...props }: Props) {
   const [isShowAlert, setIsShowAlert] = useState<boolean>(false)
   const [textErrorAlert, setTextErrorAlert] = useGlobalState('textErrorAlert')
   const [displayErrorAlert, setDisplayErrorAlert] = useGlobalState('displayErrorAlert')
-
+  const [alertType, setAlertType] = useGlobalState('alertType')
+  const searchParams = useSearchParams()
 
   const handleButton = () => {
     setIsShowAlert(true)
@@ -22,13 +24,23 @@ export function SubmitButton({ children, pendingText, ...props }: Props) {
 
   useEffect(() => {
     if (!isPending && isShowAlert) {
-      setTextErrorAlert('Email or password is wrong!')
-      setDisplayErrorAlert('fixed')
+      const message: string | null = searchParams.get('message')
+      if (message) {
+        if (message === 'Check email to continue sign in process') {
+          setAlertType('info')
+          } else {
+            setAlertType('error')
+        }
+
+        setTextErrorAlert(message)
+        setDisplayErrorAlert('fixed')
+
+      }
 
       setTimeout(() => {
         setTextErrorAlert('')
         setDisplayErrorAlert('hidden')
-      }, 3000)
+      }, 5000)
 
     }
   }, [isPending])

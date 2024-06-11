@@ -8,7 +8,7 @@ interface dataLabel {
 
 export default function Label(props: dataLabel) {
   return (
-    <div className="text-xs mt-2 flex flex-row">
+    <div className="text-xs mt-2 flex flex-row text-white">
       <div className="">
         <AccessTime fontSize="small" />
         <span className="ps-1 my-auto">{props.created_at}</span>
