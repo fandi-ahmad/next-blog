@@ -25,6 +25,7 @@ export default function ProfileData() {
   const router = useRouter()
   const [userList, setUserList] = useState<any>()
   const [isDataReady, setIsDataReady] = useState<boolean>(false)
+  const [stateForFix, setStateForFix] = useState('')
 
   const [userEmail, setUserEmail] = useState<string>('')
   const [userIdAuth, setUserIdAuth] = useState<string>('')
@@ -91,11 +92,14 @@ export default function ProfileData() {
     setIsShowLoading(true)
     getCurrentUserLogin()
     getUserByUsernameInParam()
+  }, [stateForFix])
+
+  useEffect(() => {
     if (isDataReady) {
       getArticleByUser()
       setIsShowLoading(false)
     }
-  }, [isDataReady])
+  }, [isDataReady, stateForFix])
 
   // ==========================
 
