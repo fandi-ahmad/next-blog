@@ -40,8 +40,7 @@ export default function Login() {
         </SubmitButton>
         
         <center className="text-xs">
-          <span>Don&lsquo;t have an account?</span>
-          {/* `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`. */}
+          <span>create an account?</span>
           <Link href={'/register'} className="text-blue-300 hover:underline"> Sign Up</Link>
         </center>
       </form>
