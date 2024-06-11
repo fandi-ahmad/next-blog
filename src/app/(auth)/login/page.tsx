@@ -2,10 +2,10 @@ import React from 'react';
 import Link from "next/link"
 import { SubmitButton } from "../(components)/SubmitButton"
 import { Heading } from "../(components)/Heading"
-import { TextField } from "@mui/material"
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import CheckUser from '../(components)/CheckUser';
+import InputField from '@/components/InputField';
 
 export default function Login() {
 
@@ -32,16 +32,16 @@ export default function Login() {
       <CheckUser/>
       <Heading>Sign In</Heading>
       <form className="max-w-fit mx-auto">
-        <TextField label="Email" name="email" variant="outlined" type="email" required className="w-full mb-4" />
-        <TextField label="Password" name="password" variant="outlined" type="password" required className="w-full mb-6" />
+        <InputField label='Email' name='email' type='email' />
+        <InputField label='Password' name='password' type='password' />
 
-        <SubmitButton formAction={signIn} pendingText="Signing In..." className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2 w-full text-white">
+        <SubmitButton formAction={signIn} pendingText="Signing In..." className="bg-blue-600 hover:bg-blue-500 rounded-md px-4 py-2 text-foreground my-2 w-full text-white transition-all duration-100">
           Sign In
         </SubmitButton>
         
         <center className="text-xs">
           <span>Don&apos;t have an account?</span>
-          <Link href={'/register'} className="text-blue-600 hover:underline"> Sign Up</Link>
+          <Link href={'/register'} className="text-blue-300 hover:underline"> Sign Up</Link>
         </center>
       </form>
     </>

@@ -51,13 +51,13 @@ export default function Home() {
         <div className="flex justify-center">
           <div className="flex items-center flex-row">
             <Box className='mb-6 mr-6 w-72' sx={{ display: 'flex', alignItems: 'flex-end' }}>
-              <Search sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+              <Search sx={{ color: 'action.active', mr: 1, my: 0.5 }} className="text-white" />
               <TextField
                 className="w-full mt-4"
                 placeholder="Search article"
-                type="search"
                 variant="standard"
                 onChange={(e) => searchArticle(e.target.value)}
+                sx={{ input: { color: "white" } }}
               />
             </Box>
           </div>

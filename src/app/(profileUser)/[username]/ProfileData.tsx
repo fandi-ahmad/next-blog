@@ -170,7 +170,7 @@ export default function ProfileData() {
         {
           isUserLoginSame ?
           <Tooltip title='Edit profile' arrow onClick={openEditProfile}>
-            <Edit fontSize="small" className="cursor-pointer text-gray-400 hover:text-gray-500" />
+            <Edit fontSize="small" className="cursor-pointer text-gray-400 hover:text-blue-200" />
           </Tooltip> : null
         }
       </div>
@@ -181,7 +181,7 @@ export default function ProfileData() {
         {
           isUserLoginSame ? 
           <Link href={`/${usernameLogin}/new-article`}>
-            <Button className="capitalize" variant="outlined">Create New Article</Button>
+            <Button className="capitalize border border-white hover:border-blue-200 text-white hover:text-blue-200" variant="outlined">Create New Article</Button>
           </Link> : null
         }
       </div>

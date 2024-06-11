@@ -21,10 +21,10 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/next-write-logo.svg" />
       </head>
-      <body className={inter.className + ' px-4 sm:px-12 md:px-24 xl:px-52'}>
+      <body className={inter.className + ' px-4 sm:px-12 md:px-24 xl:px-52 bg-gray-800 text-white'}>
         <Navbar/>
         <BaseAlert/>
-        <div className="text-gray-700">
+        <div>
           {children}
         </div>
       </body>

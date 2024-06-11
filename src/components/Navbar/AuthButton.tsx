@@ -16,10 +16,10 @@ export default async function AuthButton() {
   };
 
   return user ? (
-    <form action={signOut} className="ms-4 sm:ms-6 cursor-pointer font-medium hover:text-gray-600">
+    <form action={signOut} className="ms-4 sm:ms-6 cursor-pointer font-medium hover:text-blue-200">
       <button>Logout</button>
     </form>
   ) : (
-    <Link href={'/login'} className="ms-4 sm:ms-6 cursor-pointer font-medium hover:text-gray-600">Login</Link>
+    <Link href={'/login'} className="ms-4 sm:ms-6 cursor-pointer font-medium hover:text-blue-200">Login</Link>
   )
 }
