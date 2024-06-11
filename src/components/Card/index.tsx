@@ -30,14 +30,14 @@ export default function Card(props: dataCard) {
 
   return (
     <>
-      <div className="text-gray-700 mb-4 sm:mb-6">
-        <Link href={`/article/${props.idForHref}`} className="flex justify-between  hover:bg-gray-300 px-4 py-3 rounded-md duration-100 transition-all cursor-pointer">
+      <div className="mb-4 sm:mb-6">
+        <Link href={`/article/${props.idForHref}`} className="flex justify-between text-blue-300 hover:text-blue-400 px-4 py-3 rounded-md duration-100 transition-all cursor-pointer">
 
           <div>
             <div>
               <div>
                 <h2 className="text-sm sm:text-xl lg:text-2xl font-semibold">{props.head}</h2>
-                <span className="hidden sm:block">{props.body}</span>
+                <span className="hidden sm:block text-white">{props.body}</span>
               </div>
               <Label created_at={props.created_at} username={props.username} label={props.label} />
             </div>

@@ -46,8 +46,8 @@ export default function ArticleId() {
   }, [])
 
   return (
-    <main className="mt-2">
-      <h2 className="text-2xl sm:text-4xl lg:text-5xl font-semibold mb-1">{headPost}</h2>
+    <main className="mt-10">
+      <h2 className="text-2xl sm:text-4xl lg:text-5xl font-semibold mb-1 text-blue-300">{headPost}</h2>
 
       <div className="text-xs mt-2 flex flex-row mb-4 sm:mb-6">
         <div>

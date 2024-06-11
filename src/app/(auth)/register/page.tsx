@@ -5,6 +5,8 @@ import Link from "next/link";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import CheckUser from "../(components)/CheckUser";
+import InputField from '@/components/InputField';
 
 export default function Register() {
   const signUp = async (formData: FormData) => {
@@ -34,18 +36,19 @@ export default function Register() {
 
   return (
     <>
+      <CheckUser/>
       <Heading>Sign Up</Heading>
       <form className="max-w-fit mx-auto">
-        <TextField label="Email" name="email" variant="outlined" type="email" required className="w-full mb-4" />
-        <TextField label="Password" name="password" variant="outlined" type="password" required className="w-full mb-6" />
-        
-        <SubmitButton formAction={signUp} pendingText="Signing Up..." className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2 w-full text-white">
+        <InputField label='Email' name='email' type='email' />
+        <InputField label='Password' name='password' type='password' />
+
+        <SubmitButton formAction={signUp} pendingText="Signing Up..." className="bg-blue-600 hover:bg-blue-500 rounded-md px-4 py-2 text-foreground my-2 w-full text-white transition-all duration-100">
           Sign Up
         </SubmitButton>
         
         <center className="text-xs">
           Have an account?
-          <Link href={'/login'} className="text-blue-600 hover:underline"> Sign In</Link>
+          <Link href={'/login'} className="text-blue-300 hover:underline"> Sign In</Link>
         </center>
       </form>
     </>
