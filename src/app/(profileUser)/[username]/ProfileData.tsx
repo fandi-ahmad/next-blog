@@ -222,7 +222,7 @@ export default function ProfileData() {
       <Dialog open={isOpenDialodDelete} onClose={closeEditProfile}>
         <DialogTitle>Delete Article</DialogTitle>
         <DialogContent>
-          <p>Are you sure you want to delete the selected articles? you can't recover it back.</p>
+          <p>Are you sure you want to delete the selected articles? you can&apos;t recover it back.</p>
         </DialogContent>
         <DialogActions>
           <Button className="capitalize" onClick={() => setIsOpenDialogDelete(false)}>Cancel</Button>

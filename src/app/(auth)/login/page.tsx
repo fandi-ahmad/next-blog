@@ -40,7 +40,7 @@ export default function Login() {
         </SubmitButton>
         
         <center className="text-xs">
-          <span>create an account?</span>
+          <span>{"create an account?"}</span>
           <Link href={'/register'} className="text-blue-300 hover:underline"> Sign Up</Link>
         </center>
       </form>

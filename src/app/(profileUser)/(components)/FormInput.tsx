@@ -34,16 +34,15 @@ export default function FormInput(props: formInputType) {
   const [bodyPost, setBodyPost] = useGlobalState('bodyPost')
   const [label, setLabel] = useGlobalState('labelPost')
 
-  const getUserByUsername = async () => {
-    const { data: users, error } = await supabase
-    .from('users')
-    .select('*').eq('username', usernameLogin).maybeSingle()
-
-    users.id ? setIdUser(users.id) : null
-  }
-
   useEffect(() => {
     if (usernameLogin) {
+      const getUserByUsername = async () => {
+        const { data: users, error } = await supabase
+        .from('users')
+        .select('*').eq('username', usernameLogin).maybeSingle()
+    
+        users.id ? setIdUser(users.id) : null
+      }
       getUserByUsername()
     }
   }, [usernameLogin])
@@ -60,12 +59,12 @@ export default function FormInput(props: formInputType) {
             onChange={(e) => setHeadPost(e.target.value)}
             sx={{ input: { color: "white", borderColor: 'white', outlineColor: 'white' } }}
             InputLabelProps={{
-              style: { color: 'white' }, // Change label color to white
+              style: { color: 'white' },
             }}
-            inputProps={{ style: { color: 'white' } }} // Change text color to white
+            inputProps={{ style: { color: 'white' } }}
           />
           
-          <textarea required placeholder="Text Body*"
+          <textarea required placeholder="Text Body *"
             className="border bg-transparent border-1 border-white target:border-blue-500 outline-none rounded-md w-full py-2 px-4 mb-4"
             value={bodyPost}
             rows={8}
@@ -80,9 +79,9 @@ export default function FormInput(props: formInputType) {
             onChange={(e) => setLabel(e.target.value)}
             sx={{ input: { color: "white", borderColor: 'white', outlineColor: 'white' } }}
             InputLabelProps={{
-              style: { color: 'white' }, // Change label color to white
+              style: { color: 'white' },
             }}
-            inputProps={{ style: { color: 'white' } }} // Change text color to white
+            inputProps={{ style: { color: 'white' } }}
           />
 
         </div>

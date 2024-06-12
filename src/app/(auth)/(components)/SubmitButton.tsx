@@ -13,9 +13,9 @@ export function SubmitButton({ children, pendingText, ...props }: Props) {
   const { pending, action } = useFormStatus();
   const isPending = pending && action === props.formAction;
   const [isShowAlert, setIsShowAlert] = useState<boolean>(false)
-  const [textErrorAlert, setTextErrorAlert] = useGlobalState('textErrorAlert')
-  const [displayErrorAlert, setDisplayErrorAlert] = useGlobalState('displayErrorAlert')
-  const [alertType, setAlertType] = useGlobalState('alertType')
+  const [textErrorAlert, setTextErrorAlert] = useGlobalState("textErrorAlert")
+  const [displayErrorAlert, setDisplayErrorAlert] = useGlobalState("displayErrorAlert")
+  const [alertType, setAlertType] = useGlobalState("alertType")
   const searchParams = useSearchParams()
 
   const handleButton = () => {
@@ -24,22 +24,22 @@ export function SubmitButton({ children, pendingText, ...props }: Props) {
 
   useEffect(() => {
     if (!isPending && isShowAlert) {
-      const message: string | null = searchParams.get('message')
+      const message: string | null = searchParams.get("message")
       if (message) {
-        if (message === 'Check email to continue sign in process') {
-          setAlertType('info')
+        if (message === "Check email to continue sign in process") {
+          setAlertType("info")
           } else {
-            setAlertType('error')
+            setAlertType("error")
         }
 
         setTextErrorAlert(message)
-        setDisplayErrorAlert('fixed')
+        setDisplayErrorAlert("fixed")
 
       }
 
       setTimeout(() => {
-        setTextErrorAlert('')
-        setDisplayErrorAlert('hidden')
+        setTextErrorAlert("")
+        setDisplayErrorAlert("hidden")
       }, 5000)
 
     }
