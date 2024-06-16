@@ -36,8 +36,8 @@ export default function Card(props: dataCard) {
           <div>
             <div>
               <div>
-                <h2 className="text-sm sm:text-xl lg:text-2xl font-semibold">{props.head}</h2>
-                <span className="hidden sm:block text-white">{props.body}</span>
+                <h2 className="text-2xl font-semibold">{props.head}</h2>
+                <span className="text-white">{props.body}</span>
               </div>
               <Label created_at={props.created_at} username={props.username} label={props.label} />
             </div>
