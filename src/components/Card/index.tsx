@@ -30,7 +30,7 @@ export default function Card(props: dataCard) {
 
   return (
     <>
-      <div className="mb-4 sm:mb-6">
+      <div className="mb-4 sm:mb-6 border border-white rounded-md">
         <Link href={`/article/${props.idForHref}`} className="flex justify-between text-blue-300 hover:text-blue-400 px-4 py-3 rounded-md duration-100 transition-all cursor-pointer">
 
           <div>
